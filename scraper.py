@@ -10,7 +10,7 @@ class Scraper:
 
     def run(self):
         ads = self._get_ads()
-
+        print ads
     def _parse_ads(self):
         pass
 
@@ -40,7 +40,7 @@ class Scraper:
             print tmp
             links += tmp
 
-        rs = (requests.get(u) for u in links)
+        rs = (requests.get(u) for u in links[:15])
         results = grequests.map(rs)
         return results
         
