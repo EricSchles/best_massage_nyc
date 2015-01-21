@@ -5,12 +5,15 @@ import pickle
 import argparse
 
 class Scraper:
-    def __init__(self):
+    def __init__(self,testing=False):
         self.domains = pickle.load(open(".sites_to_scrape","r"))
+	self.testing = testing
 
     def run(self):
         ads = self._get_ads()
         print ads
+	if self.testing:
+            return ads
     def _parse_ads(self):
         pass
 
