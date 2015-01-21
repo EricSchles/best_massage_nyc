@@ -3,15 +3,21 @@ import requests
 import grequests
 import pickle
 import argparse
+import sqlalchemy as sql
 
 class Scraper:
     def __init__(self,testing=False):
         self.domains = pickle.load(open(".sites_to_scrape","r"))
 	self.testing = testing
-
+        #db stuff:
+        self.engine = sql.create_engine("sqlite://:memory",echo=True)
+        self.Base = sql.ext.declarative.declarative_base()
+        
     def run(self):
         ads = self._get_ads()
-	if self.testing:
+        _get_pictures(self,ads)
+        
+        if self.testing:
             return ads
     def _parse_ads(self):
         pass
@@ -19,8 +25,13 @@ class Scraper:
     #save to db
     def _get_numbers(self):
         pass
-    def _get_pictures(self):
-        pass
+    def _get_pictures(self,ads):
+        for ad in ads:
+            
+        
+        if self.testing:
+            return True #make this an actual state.
+        
     def _get_locations(self):
         pass
     def _time_stamp(self):
@@ -42,10 +53,14 @@ class Scraper:
             
             links += tmp
         
-        try:
+        if self.testing:
             rs = (grequests.get(u) for u in links[:5])
             results = grequests.map(rs)
-        except AttributeError:
-            return links[:5],"error found"
-        return results,""
         
+            return results
+        else:
+            rs = (grequests.get(u) for u in links)
+            results = grequests.map(rs)
+        
+            return results
+            
