@@ -4,4 +4,6 @@ import grequests
 import pickle
 from sys import argv
 
-domains = pickle.load("sites_to_scrape")
+
+domains = pickle.load(open(".sites_to_scrape","r"))
+print domains
