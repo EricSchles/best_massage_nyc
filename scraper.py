@@ -6,7 +6,7 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("keyword")
 args = parser.parse_args()
-keyword = args.keyword
+keyword = args.keyword # keyword must be /keyword/
 
 domains = pickle.load(open(".sites_to_scrape","r"))
 
@@ -18,14 +18,10 @@ for ind,r in enumerate(results):
     html = r.text.encode("ascii","ignore")
     obj = lxml.html.fromstring(html)
     #gets all the hyper links
-    tmp = [elem for elem in obj.xpath("//a/@href")] 
+    tmp = [elem for elem in obj.xpath('//div[@class="cat"]/a/@href')] 
+    print tmp
     links += tmp
-print len(links)
-for link in links:
-    if keyword in link and not "http" in link:
-        domain = domains[ind].split(keyword)[0] #keyword cannot be domain
-        r = requests.get(domains[ind]+link)
-        final.append(r)
-        print r.url
 
-print final[0].url
+rs = (requests.get(u) for u in links)
+results = grequests.map(rs)
+print results[0].url
