@@ -3,10 +3,6 @@ import requests
 import grequests
 import pickle
 import argparse
-parser = argparse.ArgumentParser()
-parser.add_argument("keyword")
-args = parser.parse_args()
-keyword = args.keyword # keyword must be /keyword/
 
 domains = pickle.load(open(".sites_to_scrape","r"))
 
