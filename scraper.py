@@ -1,13 +1,13 @@
 import lxml.html
 import requests
-import grequests
-import pickle
+#import grequests
+#import pickle
 import argparse
 import sqlalchemy as sql
 
 class Scraper:
     def __init__(self,testing=False):
-        self.domains = pickle.load(open(".sites_to_scrape","r"))
+        #self.domains = pickle.load(open(".sites_to_scrape","r"))
 	self.testing = testing
         #db stuff:
         self.engine = sql.create_engine("sqlite://:memory",echo=True)
