@@ -31,8 +31,5 @@ class TestScraper(unittest.TestCase):
                 assert False
     def test_one(self):
         s = Scraper(testing=True)
-        result,error_msg = s.run()
-        if error_msg != '':
-            print result
-            assert False
+        if not s.run(): assert False
         
