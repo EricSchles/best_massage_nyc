@@ -2,8 +2,11 @@ import lxml.html
 import requests
 import grequests
 import pickle
-from sys import argv
-
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument("keyword")
+args = parser.parse_args()
+keyword = args.keyword
 
 domains = pickle.load(open(".sites_to_scrape","r"))
 
