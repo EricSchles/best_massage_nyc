@@ -11,7 +11,6 @@ class Scraper:
 
     def run(self):
         ads = self._get_ads()
-        print ads
 	if self.testing:
             return ads
     def _parse_ads(self):
@@ -40,10 +39,13 @@ class Scraper:
             obj = lxml.html.fromstring(html)
             #gets all the hyper links
             tmp = [elem for elem in obj.xpath('//div[@class="cat"]/a/@href')] 
-            print tmp
+            
             links += tmp
-
-        rs = (requests.get(u) for u in links[:15])
-        results = grequests.map(rs)
-        return results
+        
+        try:
+            rs = (grequests.get(u) for u in links[:5])
+            results = grequests.map(rs)
+        except AttributeError:
+            return links[:5],"error found"
+        return results,""
         

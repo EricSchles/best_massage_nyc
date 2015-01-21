@@ -1,8 +1,13 @@
 #theses tests are inspired by: https://github.com/EricSchles/syncano-python/blob/master/tests.py
 
+#usage: nosetests tests.py //passing :)
 import unittest
 import urllib2
-import 
+import logging
+from scraper import Scraper
+
+logging.basicConfig(filename="tests.log", level=logging.INFO)
+
 def internet_on(addr):
     try:
         response = urllib2.urlopen(addr,timeout=20)
@@ -24,3 +29,10 @@ class TestScraper(unittest.TestCase):
         for addr in addrs:
             if not internet_on(addr):
                 assert False
+    def test_one(self):
+        s = Scraper(testing=True)
+        result,error_msg = s.run()
+        if error_msg != '':
+            print result
+            assert False
+        
