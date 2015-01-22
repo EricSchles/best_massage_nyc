@@ -52,11 +52,11 @@ class Scraper:
         if self.testing:
             rs = (grequests.get(u) for u in links[:5])
             results = grequests.map(rs)
-        
+            results = [elem.text.encode("ascii","ignore") for elem in results]
             return results
         else:
             rs = (grequests.get(u) for u in links)
             results = grequests.map(rs)
-        
+            results = [elem.text.encode("ascii","ignore") for elem in results]
             return results
             
