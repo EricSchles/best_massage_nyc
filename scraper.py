@@ -1,6 +1,6 @@
 import lxml.html
 import requests
-#import grequests
+import grequests
 import argparse
 import sqlalchemy as sql
 
