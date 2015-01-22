@@ -44,7 +44,7 @@ def index():
 	log = Logger(ip)
 	db.session.add(log)
         db.session.commit()
-	return render_template("index.html")
+	return render_template("index.html",show_results=False)
 
 @app.route("/",methods=["GET","POST"])
 def scraping():
