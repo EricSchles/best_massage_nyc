@@ -51,7 +51,7 @@ def index():
 def scraping():
         s = Scraper()
         ads = s.get_ads()
-        print ads
+        #print ads
         for ad in ads:
                ad = Ads(ad)
                db.session.add(ad)
