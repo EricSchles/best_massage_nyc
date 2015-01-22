@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from flask.ext.sqlalchemy import SQLAlchemy
 import os
 import datetime
@@ -46,7 +46,7 @@ def index():
         db.session.commit()
 	return render_template("index.html",show_results=False)
 
-@app.route("/",methods=["GET","POST"])
+@app.route("/Scraper",methods=["GET","POST"])
 def scraping():
         s = Scraper()
         ads = s.get_ads()
@@ -54,7 +54,7 @@ def scraping():
                ad = Ads(ad)
                db.session.add(ad)
                db.session.commit()
-        return render_template("index.html",show_results=True)
+        return redirect("/index",show_results=True)
 
 @app.route("/AdResults",methods=["GET","POST"])
 def ad_results():
