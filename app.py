@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from flask.ext.sqlalchemy import SQLAlchemy
 import os
 import datetime
+from scraper import Scraper
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ['DATABASE_URL']
 db = SQLAlchemy(app)
@@ -34,7 +35,9 @@ def index():
 	db.session.commit()
 	return render_template("index.html")
 
-
+@app.route("/Scraper")
+def scraping():
+        
 
 if __name__ == '__main__':
 	app.run(debug=True)

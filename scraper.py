@@ -1,7 +1,6 @@
 import lxml.html
 import requests
 #import grequests
-#import pickle
 import argparse
 import sqlalchemy as sql
 
