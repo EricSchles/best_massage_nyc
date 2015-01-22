@@ -4,17 +4,20 @@ import os
 import datetime
 from scraper import Scraper
 app = Flask(__name__)
-local = False
-if 'WORKING_FROM_HOME' in os.environ:
-        local = True
-if not local:
-        app.config["SQLALCHEMY_DATABASE_URI"] = os.environ['DATABASE_URL']
-        db = SQLAlchemy(app)
-else:
-        app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///foo.db"
-        db = SQLAlchemy(app)
+
+# local = False
+# if 'WORKING_FROM_HOME' in os.environ:
+#         local = True
+
+# if not local:
+        
+# else:
+#         app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///foo.db"
+#         db = SQLAlchemy(app)
 #http://blog.y3xz.com/blog/2012/08/16/flask-and-postgresql-on-heroku
 
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ['DATABASE_URL']
+db = SQLAlchemy(app)
 class Logger(db.Model):
         __tablename__ = 'logs'
         id = db.Column(db.Integer, primary_key=True)
