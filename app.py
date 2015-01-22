@@ -10,6 +10,7 @@ db = SQLAlchemy(app)
 #http://blog.y3xz.com/blog/2012/08/16/flask-and-postgresql-on-heroku
 
 class Logger(db.Model):
+        __tablename__ = 'logs'
         id = db.Column(db.Integer, primary_key=True)
 	ip_address = db.Column(db.String(400))
 	timestamp = db.Column(db.DateTime, default=datetime.datetime.now)
@@ -50,6 +51,7 @@ def index():
 def scraping():
         s = Scraper()
         ads = s.get_ads()
+        print ads
         for ad in ads:
                ad = Ads(ad)
                db.session.add(ad)
