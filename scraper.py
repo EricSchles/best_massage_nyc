@@ -6,30 +6,27 @@ import sqlalchemy as sql
 
 class Scraper:
     def __init__(self,testing=False):
-        #self.domains = pickle.load(open(".sites_to_scrape","r"))
+        self.domains = ["http://manhattan.backpage.com/FemaleEscorts/"]
 	self.testing = testing
-        #db stuff:
-        self.engine = sql.create_engine("sqlite://:memory",echo=True)
-        self.Base = sql.ext.declarative.declarative_base()
+    # def run(self):
+    #     ads = self._get_ads()
+    #     _get_pictures(self,ads)
         
-    def run(self):
-        ads = self._get_ads()
-        _get_pictures(self,ads)
-        
-        if self.testing:
-            return ads
+    #     if self.testing:
+    #         return ads
+
     def _parse_ads(self):
         pass
 
     #save to db
     def _get_numbers(self):
         pass
-    def _get_pictures(self,ads):
-        for ad in ads:
+    # def _get_pictures(self,ads):
+    #     for ad in ads:
             
         
-        if self.testing:
-            return True #make this an actual state.
+    #     if self.testing:
+    #         return True #make this an actual state.
         
     def _get_locations(self):
         pass
@@ -39,7 +36,7 @@ class Scraper:
     def _text_analysis(self):
         pass
     
-    def _get_ads(self):
+    def get_ads(self):
         rs = (grequests.get(u) for u in self.domains)
         results = grequests.map(rs)
         final = []

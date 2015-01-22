@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<ul class=ads>
+  {% for ad in ads %}
+  <li> {{ad.data}}</li>
+</ul>
+
+{% endblock %}

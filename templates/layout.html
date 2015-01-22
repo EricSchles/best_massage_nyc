@@ -98,59 +98,8 @@ body {
 
 
 </head>
-<body>
-
 <body class="oneColElsCtr">
-
- 
-<div id="container">
-  <div id="mainContent">
-    
-<!-- Nav Start -->
-  <div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container-fluid">
-  <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-  </a>
-  <a class="brand" href="{{ url_for('index') }}" style="padding:0 0 0 10px;">Index</a>
-  <ul class="nav pull-center">
-    <br />
-    <br />
-
-    <li><em><strong>La la</strong></em></li>
-  </ul>
-    <ul class="nav pull-right">
-
-      <li class="divider-vertical"></li>
-      <a class="brand" href="{{ url_for('index') }}" style="padding:0 0 0 10px;"></a>
-    </ul>
-  </div>
-      </div>
-    </div>
-
-  </div>
-
-<br />
-<br />
-<br />
-<br />
-  <p>Fighting Slavery isn't a job, it's a passion</p>
-
-  <p>Tools to help you reclaim the lives lost to hate:</p>
-
-  <form action="/Scraper" method=post enctype=multipart/form-data>
-    <input type="submit" value="Scrape Backpage">
-  </form>
-   
-
-
-    <!-- end #mainContent --></div>
-<!-- end #container --></div>
-</body>
-</html>
+{% block content %}{% endblock %}
 
 </body>
 </html>
