@@ -5,34 +5,23 @@ import datetime
 from scraper import Scraper
 app = Flask(__name__)
 
-# local = False
-# if 'WORKING_FROM_HOME' in os.environ:
-#         local = True
+local = False
+if 'WORKING_FROM_HOME' in os.environ:
+        local = True
 
-# if not local:
-        
-# else:
-#         app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///foo.db"
-#         db = SQLAlchemy(app)
+if not local:
+        app.config["SQLALCHEMY_DATABASE_URI"] = os.environ['DATABASE_URL']
+        db = SQLAlchemy(app)
+
+else:
+        app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///foo.db"
+        db = SQLAlchemy(app)
 #http://blog.y3xz.com/blog/2012/08/16/flask-and-postgresql-on-heroku
-
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ['DATABASE_URL']
-db = SQLAlchemy(app)
-class Logger(db.Model):
-        __tablename__ = 'logs'
-        id = db.Column(db.Integer, primary_key=True)
-	ip_address = db.Column(db.String(400))
-	timestamp = db.Column(db.DateTime, default=datetime.datetime.now)
-
-	def __init__(self,ip_address):
-		self.ip_address = ip_address
-
-	def __repr__(self):
-		return '<ip_addr %r>' % self.ip_address
 
 
 class Ads(db.Model):
-        __tablename__ = "ads"
+        __tablename__ = 'Ads'
+        id = db.Column(db.Integer, primary_key=True)
         ad = db.Column(db.BLOB)
 
         def __init__(self,ad):
@@ -44,15 +33,6 @@ class Ads(db.Model):
 @app.route("/index",methods=["GET","POST"])
 @app.route("/",methods=["GET","POST"])
 def index():
-	if request.headers.getlist("X-Forwarded-For"):
-   		ip = request.headers.getlist("X-Forwarded-For")[0]
-	elif request.access_route:
-		ip = request.access_route
-	else:
-   		ip = request.remote_addr
-	log = Logger(ip)
-	db.session.add(log)
-        db.session.commit()
 	return render_template("index.html",show_results=False)
 
 # @app.route("/Scraper",methods=["GET","POST"])
