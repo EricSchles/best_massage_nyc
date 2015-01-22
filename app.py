@@ -32,8 +32,8 @@ class Ads(db.Model):
                 return self.ad
         
         
-@app.route("/index")
-@app.route("/")
+@app.route("/index",methods=["GET","POST"])
+@app.route("/",methods=["GET","POST"])
 def index():
 	if request.headers.getlist("X-Forwarded-For"):
    		ip = request.headers.getlist("X-Forwarded-For")[0]
@@ -46,7 +46,7 @@ def index():
 	# db.session.commit()
 	return render_template("index.html")
 
-@app.route("/Scraper")
+@app.route("/Scraper",methods=["GET","POST"])
 def scraping():
         s = Scraper()
         ads = s.get_ads()
@@ -56,7 +56,7 @@ def scraping():
                db.session.commit()
         return render_template("index.html",show_results=True)
 
-@app.route("/AdResults")
+@app.route("/AdResults",methods=["GET","POST"])
 def ad_results():
         return render_template("results.html",ads=Ads.query.all())
 
