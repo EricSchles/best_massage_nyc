@@ -43,7 +43,7 @@ def index():
    		ip = request.remote_addr
 	log = Logger(ip)
 	db.session.add(log)
-	# db.session.commit()
+        db.session.commit()
 	return render_template("index.html")
 
 @app.route("/Scraper",methods=["GET","POST"])
