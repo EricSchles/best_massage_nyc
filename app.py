@@ -43,7 +43,7 @@ def index():
    		ip = request.remote_addr
 	log = Logger(ip)
 	db.session.add(log)
-	db.session.commit()
+	# db.session.commit()
 	return render_template("index.html")
 
 @app.route("/Scraper")
@@ -51,9 +51,9 @@ def scraping():
         s = Scraper()
         ads = s.get_ads()
         for ad in ads:
-                ad = Ads(ad)
-                db.session.add(ad)
-                db.session.commit()
+               ad = Ads(ad)
+               db.session.add(ad)
+               db.session.commit()
         return render_template("index.html",show_results=True)
 
 @app.route("/AdResults")
