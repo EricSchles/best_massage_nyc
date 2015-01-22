@@ -46,7 +46,7 @@ def index():
         db.session.commit()
 	return render_template("index.html")
 
-@app.route("/Scraper",methods=["GET","POST"])
+@app.route("/",methods=["GET","POST"])
 def scraping():
         s = Scraper()
         ads = s.get_ads()
