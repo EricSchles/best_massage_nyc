@@ -4,9 +4,15 @@ import os
 import datetime
 from scraper import Scraper
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ['DATABASE_URL']
-db = SQLAlchemy(app)
-
+local = False
+if 'WORKING_FROM_HOME' in os.environ:
+        local = True
+if not local:
+        app.config["SQLALCHEMY_DATABASE_URI"] = os.environ['DATABASE_URL']
+        db = SQLAlchemy(app)
+else:
+        app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///foo.db"
+        db = SQLAlchemy(app)
 #http://blog.y3xz.com/blog/2012/08/16/flask-and-postgresql-on-heroku
 
 class Logger(db.Model):
@@ -24,7 +30,6 @@ class Logger(db.Model):
 
 class Ads(db.Model):
         __tablename__ = "ads"
-        id = db.Column(db.Integer, primary_key=True)
         ad = db.Column(db.BLOB)
 
         def __init__(self,ad):
