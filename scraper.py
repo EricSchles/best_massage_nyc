@@ -8,26 +8,34 @@ class Scraper:
     def __init__(self,testing=False):
         self.domains = ["http://manhattan.backpage.com/FemaleEscorts/"]
 	self.testing = testing
-    # def run(self):
-    #     ads = self._get_ads()
-    #     _get_pictures(self,ads)
+    def run(self):
+        ads = self._get_ads()
+        pictures = []
+        ad_texts = []
+        for ad in ads:
+            pictures.append(self._get_pictures(ad))#testing needed
+            ad_texts.append(self_parse_ads(ad))#testing needed
+            
+    def _parse_ads(self,ad):
+        html = lxml.html.fromstring(ad)
+        text_obj = html.xpath("//div") #figure out what goes here.
+        return [elem.text_content() for elem in text_obj][0] #this is a guess
         
-    #     if self.testing:
-    #         return ads
-
-    def _parse_ads(self):
-        pass
-
     #save to db
     def _get_numbers(self):
         pass
-    # def _get_pictures(self,ads):
-    #     for ad in ads:
-            
-        
-    #     if self.testing:
-    #         return True #make this an actual state.
-        
+
+    #testing needed
+    def _get_pictures(self,ad):
+        html = lxml.html.fromstring(ad)
+        img_urls = html.xpath("//img/@src")
+        imgs = []
+        for url in img_urls:
+            img_name = url.split("/")[-1]
+            with open(img_name,"rb") as f:
+                imgs.append(f.read())
+        return imgs
+
     def _get_locations(self):
         pass
     def _time_stamp(self):
@@ -36,7 +44,7 @@ class Scraper:
     def _text_analysis(self):
         pass
     
-    def get_ads(self):
+    def _get_ads(self):
         rs = (grequests.get(u) for u in self.domains)
         results = grequests.map(rs)
         final = []
