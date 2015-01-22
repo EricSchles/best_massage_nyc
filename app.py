@@ -37,7 +37,7 @@ def index():
 
 @app.route("/Scraper",methods=["GET","POST"])
 def scraping():
-        s = Scraper()
+        s = Scraper(testing=True)
         ads = s.get_ads()
         #print ads
         for ad in ads:
