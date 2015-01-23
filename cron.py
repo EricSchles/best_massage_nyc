@@ -11,7 +11,8 @@ while True:
     except:
         run(first=msg,second=on_heroku)
     run(first=msg,second=on_heroku)
-    if not argv[1]:
+    
+    try:
+        time.sleep(int(argv[3]))
+    except:
         time.sleep(300) #sleep for five minutes
-    else:
-        time.sleep(int(argv[1]))
