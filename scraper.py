@@ -6,6 +6,11 @@ import sqlalchemy as sql
 import cStringIO
 import urllib
 from PIL import Image
+
+
+#http://stackoverflow.com/questions/7391945/how-do-i-read-image-data-from-a-url-in-python
+#http://stackoverflow.com/questions/13137817/how-to-download-image-using-requests
+
 class Scraper:
     def __init__(self,testing=False):
         self.domains = ["http://manhattan.backpage.com/FemaleEscorts/"]
