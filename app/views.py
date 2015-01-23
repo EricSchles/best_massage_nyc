@@ -3,6 +3,7 @@ import datetime
 import os
 from flask import render_template, request, redirect
 from models import Ads
+from subprocess import call
 
 @app.route("/index",methods=["GET","POST"])
 @app.route("/",methods=["GET","POST"])
@@ -11,14 +12,8 @@ def index():
 
 @app.route("/Scraper",methods=["GET","POST"])
 def scraping():
-        s = Scraper(testing=True)
-        ads = s.get_ads()
-        print ads
-        for ad in ads:
-               ad = Ads(ad)
-               db.session.add(ad)
-               db.session.commit()
-        return render_template("/index")#,show_results=True)
+        #call(["heroku","run","python"
+        return render_template("index.html")#this is a place holder, add subprocess
 
 @app.route("/AdResults",methods=["GET","POST"])
 def ad_results():

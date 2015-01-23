@@ -7,7 +7,14 @@ import cStringIO
 import urllib
 from PIL import Image
 
-
+# s = Scraper(testing=True)
+#         ads = s.get_ads()
+#         print ads
+#         for ad in ads:
+#                ad = Ads(ad)
+#                db.session.add(ad)
+#                db.session.commit()
+#         return render_template("/index",show_results=True)
 #http://stackoverflow.com/questions/7391945/how-do-i-read-image-data-from-a-url-in-python
 #http://stackoverflow.com/questions/13137817/how-to-download-image-using-requests
 
