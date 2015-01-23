@@ -12,8 +12,10 @@ def index():
 
 @app.route("/Scraper",methods=["GET","POST"])
 def scraping():
-        #call(["heroku","run","python"
-        return render_template("index.html")#this is a place holder, add subprocess
+        call(["python","testing.py"])
+        with open("filez.txt","r") as f:
+                info = f.read()
+        return info #this is a place holder, add subprocess
 
 @app.route("/AdResults",methods=["GET","POST"])
 def ad_results():
