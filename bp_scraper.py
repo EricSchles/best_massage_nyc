@@ -17,12 +17,12 @@ class Scraper:
 	self.testing = testing
     def run(self):
         ads = self._get_ads()
-        pictures = []
-        ad_texts = []
-        for ad in ads:
-            pictures.append(self._get_pictures(ad))#testing needed
-            ad_texts.append(self_parse_ads(ad))#testing needed
-        return pictures, ad_texts
+        # pictures = []
+        # ad_texts = []
+        # for ad in ads:
+        #     pictures.append(self._get_pictures(ad))#testing needed
+        #     ad_texts.append(self_parse_ads(ad))#testing needed
+        # return pictures, ad_texts
 
     def _parse_ads(self,ad):
         html = lxml.html.fromstring(ad)
@@ -78,3 +78,8 @@ class Scraper:
             ad = Ads(result)
             db.session.add(ad)
             db.session.commit()
+        return results
+    
+if __name__ == '__main__':
+    s = Scraper()
+    s.run()
