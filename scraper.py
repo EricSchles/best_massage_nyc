@@ -3,7 +3,9 @@ import requests
 import grequests
 import argparse
 import sqlalchemy as sql
-
+import cStringIO
+import urllib
+from PIL import Image
 class Scraper:
     def __init__(self,testing=False):
         self.domains = ["http://manhattan.backpage.com/FemaleEscorts/"]
@@ -15,7 +17,8 @@ class Scraper:
         for ad in ads:
             pictures.append(self._get_pictures(ad))#testing needed
             ad_texts.append(self_parse_ads(ad))#testing needed
-            
+        return pictures, ad_texts
+
     def _parse_ads(self,ad):
         html = lxml.html.fromstring(ad)
         text_obj = html.xpath("//div") #figure out what goes here.
@@ -31,8 +34,8 @@ class Scraper:
         img_urls = html.xpath("//img/@src")
         imgs = []
         for url in img_urls:
-            img_name = url.split("/")[-1]
-            with open(img_name,"rb") as f:
+            img_file = cStringIO.StringIO(urllib.urlopen(url).read())
+            img = Image.open(img_file)
                 imgs.append(f.read())
         return imgs
 
