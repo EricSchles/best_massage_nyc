@@ -2,7 +2,7 @@ from app import app
 import datetime
 import os
 from flask import render_template, request, redirect
-
+from models import Ads
 
 @app.route("/index",methods=["GET","POST"])
 @app.route("/",methods=["GET","POST"])
@@ -13,11 +13,11 @@ def index():
 def scraping():
         s = Scraper(testing=True)
         ads = s.get_ads()
-        #print ads
-        # for ad in ads:
-        #        ad = Ads(ad)
-        #        db.session.add(ad)
-        #        db.session.commit()
+        print ads
+        for ad in ads:
+               ad = Ads(ad)
+               db.session.add(ad)
+               db.session.commit()
         return render_template("/index")#,show_results=True)
 
 @app.route("/AdResults",methods=["GET","POST"])

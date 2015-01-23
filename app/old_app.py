@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+1from flask import Flask, render_template, request, redirect
 from flask.ext.sqlalchemy import SQLAlchemy
 import os
 import datetime
@@ -18,7 +18,6 @@ else:
         db = SQLAlchemy(app)
 #http://blog.y3xz.com/blog/2012/08/16/flask-and-postgresql-on-heroku
 
-
 class Ads(db.Model):
         __tablename__ = 'Ads'
         id = db.Column(db.Integer, primary_key=True)
@@ -26,6 +25,7 @@ class Ads(db.Model):
 
         def __init__(self,ad):
                 self.ad = ad
+
         
 @app.route("/index",methods=["GET","POST"])
 @app.route("/",methods=["GET","POST"])
