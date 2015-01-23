@@ -6,15 +6,8 @@ import sqlalchemy as sql
 import cStringIO
 import urllib
 from PIL import Image
-
-# s = Scraper(testing=True)
-#         ads = s.get_ads()
-#         print ads
-#         for ad in ads:
-#                ad = Ads(ad)
-#                db.session.add(ad)
-#                db.session.commit()
-#         return render_template("/index",show_results=True)
+from app.models import Ads
+from app import db
 #http://stackoverflow.com/questions/7391945/how-do-i-read-image-data-from-a-url-in-python
 #http://stackoverflow.com/questions/13137817/how-to-download-image-using-requests
 
@@ -48,7 +41,7 @@ class Scraper:
         for url in img_urls:
             img_file = cStringIO.StringIO(urllib.urlopen(url).read())
             img = Image.open(img_file)
-                imgs.append(f.read())
+            imgs.append(f.read())
         return imgs
 
     def _get_locations(self):
@@ -76,10 +69,12 @@ class Scraper:
             rs = (grequests.get(u) for u in links[:5])
             results = grequests.map(rs)
             results = [elem.text.encode("ascii","ignore") for elem in results]
-            return results
+            
         else:
             rs = (grequests.get(u) for u in links)
             results = grequests.map(rs)
             results = [elem.text.encode("ascii","ignore") for elem in results]
-            return results
-            
+        for result in results:
+            ad = Ads(result)
+            db.session.add(ad)
+            db.session.commit()
