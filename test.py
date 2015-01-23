@@ -1,3 +1,3 @@
 from subprocess import call
 
-call(['heroku','run','python','testing.py'])
+call(['python','testing.py'])
