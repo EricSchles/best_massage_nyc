@@ -13,7 +13,7 @@ def index():
 @app.route("/Scraper",methods=["GET","POST"])
 def scraping():
         call(["python","testing.py"])
-        test = open("tmp/filez.txt","r").read()
+        test = open("../tmp/filez.txt","r").read()
         return  test #this is a place holder, add subprocess
 
 @app.route("/AdResults",methods=["GET","POST"])
