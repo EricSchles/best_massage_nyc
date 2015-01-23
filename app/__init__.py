@@ -1,8 +1,6 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 import os
-import datetime
-from subprocess import call
 app = Flask(__name__)
 
 production = False
@@ -18,8 +16,6 @@ else:
         db = SQLAlchemy(app)
 #http://blog.y3xz.com/blog/2012/08/16/flask-and-postgresql-on-heroku
 
+import models, views
 
 
-
-if __name__ == '__main__':
-	app.run(debug=True)
