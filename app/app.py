@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect
 from flask.ext.sqlalchemy import SQLAlchemy
 import os
 import datetime
-from scraper import Scraper
+from subprocess import call
 app = Flask(__name__)
 
 production = False
