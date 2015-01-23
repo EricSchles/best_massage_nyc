@@ -5,11 +5,11 @@ import datetime
 from scraper import Scraper
 app = Flask(__name__)
 
-local = False
-if 'WORKING_FROM_HOME' in os.environ:
-        local = True
+production = False
+if 'ON_HEROKU' in os.environ:
+        production = True
 
-if not local:
+if production:
         app.config["SQLALCHEMY_DATABASE_URI"] = os.environ['DATABASE_URL']
         db = SQLAlchemy(app)
 
